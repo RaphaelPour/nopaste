@@ -113,7 +113,16 @@ const generateLink = (mode) => {
             (100 * url.length) / data.length
         )}%`;
 
-        showCopyBar(url);
+        let form = new FormData();
+        form.append('url', url);
+
+        let pms3 = new XMLHttpRequest();
+        pms3.open('post', 'https://url.raphaelpour.de/');
+        pms3.onload = function() {
+            console.log(pms3.response);
+            showCopyBar(pms3.response);
+        };        
+        pms3.send(form);
     });
 };
 
